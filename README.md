@@ -4,13 +4,10 @@ Projet C++ qui vise à reproduire le jeu Stratego.
 
 Badges
 
-- build: ![build-status](#)
-- license: ![license](#)
-
 ## Table des matières
 
 - [Description](#description)
-- [Règle du jeu](règle-du-jeu)
+- [Règle du jeu](#règle-du-jeu)
 - [Prérequis](#prérequis)
 - [Installation / Compilation](#installation--compilation)
 - [Utilisation](#utilisation)
