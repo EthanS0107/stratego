@@ -17,15 +17,26 @@ bool Board::placePawn(int row, int col, std::shared_ptr<Pawn> pawn) {
 }
 
 bool Board::movePawn(int startRow, int startCol, int endRow, int endCol) {
-    if (!grid[startRow][startCol]->isMovable() && startRow >= 0 && startRow < ROWS && startCol >= 0 && startCol < COLS &&
-        endRow >= 0 && endRow < ROWS && endCol >= 0 && endCol < COLS) {
-
-        if (grid[startRow][startCol] != nullptr && grid[endRow][endCol] == nullptr) {
-            grid[endRow][endCol] = grid[startRow][startCol];
-            grid[startRow][startCol] = nullptr;
-            return true;
-        }
+    // Vérifier bornes
+    if (!(startRow >= 0 && startRow < ROWS && startCol >= 0 && startCol < COLS &&
+          endRow   >= 0 && endRow   < ROWS && endCol   >= 0 && endCol   < COLS)) {
+        return false;
     }
+
+    // Vérifier présence du pion
+    if (grid[startRow][startCol] == nullptr) return false;
+
+    // Vérifier que le pion est movable
+    if (!grid[startRow][startCol]->isMovable()) return false;
+
+    // Vérifier que la case de destination est vide
+    if (grid[endRow][endCol] == nullptr) {
+        grid[endRow][endCol] = grid[startRow][startCol];
+        grid[startRow][startCol] = nullptr;
+        grid[endRow][endCol]->moveTo(endCol, endRow);
+        return true;
+    }
+
     return false;
 }
 
